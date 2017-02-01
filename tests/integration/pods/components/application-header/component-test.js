@@ -1,8 +1,7 @@
-import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('listing-table', 'Integration | Component | listing table', {
+moduleForComponent('application-header', 'Integration | Component | application header', {
   integration: true
 });
 
@@ -10,13 +9,10 @@ test('it renders', function(assert) {
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
-  //
-  function listings() {
-    return Ember.RSVP.resolve([]);
-  }
 
-  this.set('delegate', {listings});
-  this.render(hbs`{{listing-table delegate=delegate}}`);
-   
+  this.render(hbs`{{application-header}}`);
+
+  // Template block usage:
+  this.render(hbs`{{application-header}}`);
   assert.equal(true, true);
 });

@@ -2,6 +2,7 @@
 module.exports = {
   "framework": "qunit",
   "test_page": "tests/index.html?hidepassed",
+  "reporter": "dot",
   "disable_watching": true,
   "launch_in_ci": [
     "PhantomJS"

@@ -1,3 +1,17 @@
 <div class="clearfix" data-template="listing-table">
-  <p>hi</p>
+  {{#deferred-content promise=listings as |d|}}
+    {{#d.fulfilled as |result|}}
+      {{#each result as |listing|}}
+        <article class="clearfix">
+          <h1>{{t 'listing_info'}}</h1>
+        </article>
+      {{/each}}
+    {{/d.fulfilled}}
+
+    {{#d.pending}}
+      <div class="clearfix">
+        <p>{{t 'loading'}}</p>
+      </div>
+    {{/d.pending}}
+  {{/deferred-content}}
 </div>

@@ -1,6 +1,14 @@
 import Ember from 'ember';
+const {computed} = Ember;
 
-const Row = Ember.Component.extend({
+const Table = Ember.Component.extend({
+
+  listings: computed(function() {
+    let delegate = this.get('delegate');
+    console.log(delegate);
+    return delegate.listings();
+  })
+
 });
 
-export default Row;
+export default Table;
