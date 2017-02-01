@@ -13,6 +13,7 @@ function forwardPath(req, res) {
   let params = qs.parse(query);
   params.api_key = key;
   let result = [pathname, qs.stringify(params)].join("?");
+  console.log(`querying ${result}`);
   return result;
 }
 
