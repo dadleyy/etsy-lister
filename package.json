@@ -12,10 +12,12 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
+    "dev:server": "node api/server.js",
     "test": "ember test"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
+    "dotenv": "^4.0.0",
     "ember-ajax": "^2.4.1",
     "ember-cli": "2.11.0",
     "ember-cli-app-version": "^2.0.0",
@@ -37,6 +39,8 @@
     "ember-resolver": "^2.0.3",
     "ember-source": "^2.11.0",
     "ember-welcome-page": "^2.0.2",
+    "express": "^4.14.1",
+    "express-http-proxy": "^0.11.0",
     "loader.js": "^4.0.10"
   },
   "engines": {
