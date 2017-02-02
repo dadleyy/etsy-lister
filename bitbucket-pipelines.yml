@@ -1,0 +1,9 @@
+image: node:4.6.0
+
+pipelines:
+  default:
+    - step:
+      script:
+        - npm install
+        - npm run vendor:install
+        - npm test

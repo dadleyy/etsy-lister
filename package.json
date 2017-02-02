@@ -13,6 +13,7 @@
     "build": "ember build",
     "start": "ember server",
     "dev:server": "node api/server.js",
+    "vendor:install": "bower i",
     "test": "ember test"
   },
   "devDependencies": {
