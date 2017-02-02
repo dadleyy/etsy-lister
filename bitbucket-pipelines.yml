@@ -5,6 +5,6 @@ pipelines:
     - step:
         script:
           - npm install
-          - npm run vendor:install
+          - npm run vendor:install -- --allow-root
           - npm run build
           - npm test
