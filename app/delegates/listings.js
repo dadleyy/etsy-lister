@@ -15,10 +15,39 @@ export default Ember.Object.extend({
     const filters = this.get('filters');
     const cache   = this.get('cache');
     const store   = this.get('store');
+    const id_list = [];
 
-    function finish(result) {
-      cache.replace(0, cache.length, [result]);
-      return deferred.resolve(result);
+    function toRow(listing) {
+      const [current] = cache;
+
+      function isAssociated(img) {
+        return img.get('listing_id') === listing.get('listing_id');
+      }
+
+      return {listing, images: current.images.filter(isAssociated)};
+    }
+
+    function next(record) {
+      let [current] = cache;
+
+      if(record) {
+        const image_records = record.toArray();
+        current.images = current.images.concat(image_records);
+      }
+
+      if(id_list.length === 0) {
+        return deferred.resolve(current.listings.map(toRow));
+      }
+
+      const listing = id_list.shift();
+      return store.query('listing-image', {listing}).then(next);
+    }
+
+    function images(result) {
+      const new_cache = {listings: result, images: []};
+      cache.replace(0, cache.length, [new_cache]);
+      id_list.replace(0, id_list.length, result.mapBy('id'));
+      return next();
     }
 
     function failed(err) {
@@ -26,8 +55,8 @@ export default Ember.Object.extend({
       return deferred.reject(err);
     }
 
-    let query = {keywords: filters.get('title')};
-    return store.query('listing', query).then(finish).catch(failed);
+    let query = {keywords: filters.get('title'), limit: 10};
+    return store.query('listing', query).then(images).catch(failed);
   }
 
 });
