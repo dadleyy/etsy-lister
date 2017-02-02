@@ -6,4 +6,5 @@ pipelines:
         script:
           - npm install
           - npm run vendor:install
+          - npm run build
           - npm test
