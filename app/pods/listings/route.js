@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
-  delegate: Ember.inject.service('listings'),
+const {getOwner: owner} = Ember;
 
+export default Ember.Route.extend({
   model() {
-    let delegate = this.get('delegate');
+    const delegate = owner(this).lookup('delegates:listings');
     return Ember.RSVP.resolve({delegate});
   }
 

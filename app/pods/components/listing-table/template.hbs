@@ -2,8 +2,18 @@
   {{#deferred-content promise=listings as |d|}}
     {{#d.fulfilled as |result|}}
       {{#each result as |listing|}}
-        <article class="clearfix">
-          <h1>{{t 'listing_info'}}</h1>
+        <article class="clearfix padding-tb-10 border-light margin-bottom-10">
+          <div class="margin-bottom-5 padding-lr-10 padding-bottom-5 border-bottom-light clearfix">
+            <div class="padding-bottom-5">
+              <h6 class="fg-black-lighten-20">{{t 'listing'}} <a href={{listing.url}}>#{{listing.id}}</a></h6>
+            </div>
+            <div class="clearfix nowrap overflow-hidden">
+              <h1 class="overflow-hidden nowrap ellipsis">{{listing.title}}</h1>
+            </div>
+          </div>
+          <div class="padding-lr-10">
+            <p>{{listing.description}}</p>
+          </div>
         </article>
       {{/each}}
     {{/d.fulfilled}}

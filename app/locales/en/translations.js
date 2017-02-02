@@ -3,5 +3,7 @@ export default {
   'home'         : 'Home',
   'listings'     : 'Listings',
   'listing_info' : 'Listing Info',
-  'loading'      : 'Loading'
+  'listing'      : 'Listing',
+  'loading'      : 'Loading',
+  'search'       : 'Search'
 };
