@@ -1,17 +1,30 @@
 <div class="clearfix" data-template="listing-table">
   {{#hoc-table delegate=delegate as |table|}}
     {{#table.pending as |p|}}
-      <tr class="pending"><td colspan="2"><p>loading...</p></td></tr>
+      <tr class="pending"><td colspan="4"><p>loading...</p></td></tr>
     {{/table.pending}}
 
     {{#table.row as |row|}}
+      {{#if row.empty}}
+      <tr class="listing--empty">
+        <td colspan="4">
+          <p>{{t 'no_results'}}</p>
+        </td>
+      </tr>
+      {{else}}
       <tr class="listing">
         <td class="v-align-middle">
           <p><a class="fg-0" href={{row.listing.url}} target="_blank" rel="noreferrer noopener">{{row.listing.listing_id}}</a></p>
         </td>
-        <td class="v-align-middle"><p>{{row.listing.title}}</p></td>
-        <td class="v-align-middle"><img src="{{row.images.firstObject.url_75x75}}" /></td>
+        <td class="v-align-middle ellipsis no-wrap nowrap overflow-hidden">
+          <p class="overflow-hidden ellipsis nowrap display-block">{{row.listing.title}}</p>
+        </td>
+        <td class="v-align-middle ellipsis no-wrap nowrap overflow-hidden">
+          <p class="overflow-hidden ellipsis nowrap display-block"><a class="fg-0" href={{row.shop.url}}>{{row.shop.title}}</a></p>
+        </td>
+        <td class="v-align-middle align-center"><img src="{{row.images.firstObject.url_75x75}}" /></td>
       </tr>
+      {{/if}}
     {{/table.row}}
   {{/hoc-table}}
 </div>

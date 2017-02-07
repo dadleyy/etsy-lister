@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 const type = 'listing';
 
-export default DS.RESTSerializer.extend({
+export default DS.JSONSerializer.extend({
 
   normalizeArrayResponse(store, Listing, payload) {
     let {results} = payload;
@@ -16,7 +16,7 @@ export default DS.RESTSerializer.extend({
       data.push(item);
     }
 
-    return {data, meta};
+    return { data, meta };
   }
 
 });

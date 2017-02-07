@@ -6,7 +6,9 @@ export default {
   'listing_id'   : 'Listing ID',
   'listing'      : 'Listing',
   'loading'      : 'Loading',
+  'no_results'   : 'No Results',
   'search'       : 'Search',
+  'shop'         : 'Shop',
   'thumbnail'    : 'Thumbnail',
   'title'        : 'Title'
 };

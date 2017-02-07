@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 const type = 'listing-image';
 
-export default DS.RESTSerializer.extend({
+export default DS.JSONSerializer.extend({
 
   normalizeArrayResponse(store, Listing, payload) {
     let {results} = payload;
