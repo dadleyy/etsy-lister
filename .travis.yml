@@ -1,13 +1,18 @@
 language: node_js
 node_js:
-  - "6.9.4"
-
+  - 6.9.4
 sudo: false
-
 install:
   - npm install
   - npm run vendor:install
-
 script:
-  - npm run build
+  - npm run build -- --prod --output-path ./dist/application
   - npm test
+  - tar -cvzf ./dist/charcoal.ui.tar.gz -C ./dist/application .
+deploy:
+  provider: releases
+  api_key:
+    secure: 2l10bpH8qfM/7606sCAqqoBsP3Uj9DeNFJrtdkCI025FLRHq+OWjwgGFJ6FazyHNlVDlk3GZUwwsDg+EO03ZZVoh7d3HDwB0ZZ8AL5uolMlFPx12jKq6obOwCqNnDTnYVIoR3fEUN2iectUyn0BFP6RcbX5RDsqvqYcClzH1F1lNGbJAtFmwCbpZxRF0slsVKr+vmCT2ZoGnFsQaztcuIynfyNyUavtiQgRINtnYKj2gSeQUw+2B9mmcI1ppz3Rf8KmP/fAqW36TbIABbtiQ7H4+fXYKhxQMirIll+xEf3seDcYbKm5BujPDBwv/Xvcht0WTNg3DqVqzOMqlhCg6wvjB48ssroppvL2wxEsG1s20+1TJwoSu+FSMzUX5fohEzuntgiE6GQBmdnt0PQT4zVQyPnfJSvu6fJmOeJaCQzRW9fwrp/+OlvvTIJ+TgPMqYRVTfPy+gOuuYN8wDg1qkASlTYX6k02u/BLnRRHdFHiObpJBD9jkwXEqjYiOrLf/zLLgCclAk0KJy7Wa3q19drlmXtCTVKNPhiG2wwIzR6miKChGLbKKQJ91f4patQN/KbtpN54GgnIks4W1GgK9i5Uwv4LQ1hDj+iZeEltryH8nb0gOKX0K4kCUcIeFTMFLKA4yEnzJfM0Qaqi2oYqj2DBDuIFDim/tR0qvTCknMAs=
+  file: ./dist/charcoal.ui.tar.gz
+  on:
+    tags: true
