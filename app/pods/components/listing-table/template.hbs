@@ -1,7 +1,7 @@
 <div class="clearfix" data-template="listing-table">
   {{#hoc-table delegate=delegate as |table|}}
     {{#table.pending as |p|}}
-      <tr class="pending"><td colspan="4"><p>loading...</p></td></tr>
+      <tr class="pending"><td colspan="4"><p>{{t 'loading_listings'}}</p></td></tr>
     {{/table.pending}}
 
     {{#table.row as |row|}}
