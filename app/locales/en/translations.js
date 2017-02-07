@@ -3,7 +3,10 @@ export default {
   'home'         : 'Home',
   'listings'     : 'Listings',
   'listing_info' : 'Listing Info',
+  'listing_id'   : 'Listing ID',
   'listing'      : 'Listing',
   'loading'      : 'Loading',
-  'search'       : 'Search'
+  'search'       : 'Search',
+  'thumbnail'    : 'Thumbnail',
+  'title'        : 'Title'
 };

@@ -1,0 +1,24 @@
+<div class="hoc-table">
+  <div class="hoc-table__table-container">
+    <table class="hoc-table__table">
+      <colgroup>
+        {{#each columns as |column|}}
+        <col class="{{column.rel}}" style={{column.style}} />
+        {{/each}}
+      </colgroup>
+      <thead>
+        <tr>
+          {{#each columns as |column|}}
+            <th><p><b>{{column.text}}</b></p></th>
+          {{/each}}
+        </tr>
+      </thead>
+      {{yield (hash 
+        row=(component 'hoc-table/body' rows=rows)
+        pending=(component 'hoc-table/pending' promise=rows)
+      )}}
+    </table>
+  </div>
+  <div class="hoc-table__pagination-container">
+  </div>
+</div>

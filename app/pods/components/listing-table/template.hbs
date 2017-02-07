@@ -1,36 +1,17 @@
 <div class="clearfix" data-template="listing-table">
-  {{#deferred-content promise=listings as |d|}}
-    {{#d.fulfilled as |result|}}
-      {{#each result as |row|}}
-        <article class="clearfix padding-tb-10 border-light margin-bottom-10">
-          <div class="margin-bottom-5 padding-lr-10 padding-bottom-5 border-bottom-light clearfix">
-            <div class="padding-bottom-5">
-              <h6 class="fg-black-lighten-20">{{t 'listing'}} <a href={{row.listing.url}}>#{{row.listing.id}}</a></h6>
-            </div>
-            <div class="clearfix nowrap overflow-hidden">
-              <h1 class="overflow-hidden nowrap ellipsis">{{row.listing.title}}</h1>
-            </div>
-          </div>
-          <div class="padding-lr-10">
-            <div class="clearfix overflow-hidden">
-              <div class="float-left margin-right-10">
-                {{#each row.images as |image|}}
-                <img src="{{image.url_75x75}}" alt="{{listing.title}}" />
-                {{/each}}
-              </div>
-              <div class="overflow-hidden">
-                <p>{{{row.listing.description}}}</p>
-              </div>
-            </div>
-          </div>
-        </article>
-      {{/each}}
-    {{/d.fulfilled}}
+  {{#hoc-table delegate=delegate as |table|}}
+    {{#table.pending as |p|}}
+      <tr class="pending"><td colspan="2"><p>loading...</p></td></tr>
+    {{/table.pending}}
 
-    {{#d.pending}}
-      <div class="clearfix">
-        <p>{{t 'loading'}}</p>
-      </div>
-    {{/d.pending}}
-  {{/deferred-content}}
+    {{#table.row as |row|}}
+      <tr class="listing">
+        <td class="v-align-middle">
+          <p><a class="fg-0" href={{row.listing.url}} target="_blank" rel="noreferrer noopener">{{row.listing.listing_id}}</a></p>
+        </td>
+        <td class="v-align-middle"><p>{{row.listing.title}}</p></td>
+        <td class="v-align-middle"><img src="{{row.images.firstObject.url_75x75}}" /></td>
+      </tr>
+    {{/table.row}}
+  {{/hoc-table}}
 </div>

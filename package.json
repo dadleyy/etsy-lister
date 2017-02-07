@@ -10,6 +10,7 @@
   },
   "repository": "",
   "scripts": {
+    "g": "ember g",
     "build": "ember build",
     "start": "ember server",
     "dev:server": "node api/server.js",

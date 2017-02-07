@@ -5,7 +5,9 @@ export default Ember.Controller.extend({
   applySearch() {
     const value    = this.get('title_filter');
     const delegate = this.get('model.delegate');
-    delegate.set('filters.title', value);
+    const filters  = delegate.get('filters').copy();
+    filters.set('title', value);
+    delegate.set('filters', filters);
   },
 
   actions: {

@@ -1,8 +1,24 @@
 @import "bases"
 
+@for $i from 0 through 5
+  .radius-#{$i}
+    border-radius: $i + unquote("px")
+
+p, label, input[type="text"], textarea
+  font-size: 1.1rem
+  line-height: 1.1rem
+
+strong, b
+  font-weight: 400
+
 html, body
   width: 100%
   height: 100%
+  font-family: 'Open Sans', sans-serif
+  font-weight: 300
+
+  *
+    box-sizing: border-box
 
 .oc
   max-width: 960px
@@ -24,3 +40,96 @@ html, body
 
 .overflow-hidden
   overflow: hidden
+
+.display-table--fixed
+  table-layout: fixed
+
+.hoc-table__table-container 
+  @extend .border-1
+  @extend .border-color-white-darken-10
+
+.hoc-table__table
+  @extend .display-table
+  @extend .display-table--fixed
+  @extend .width-50
+
+.hoc-table__table thead th,
+.hoc-table__table tbody td
+  @extend .padding-tb-5
+  @extend .padding-lr-10
+  @extend .align-left
+
+.hoc-table__table tbody td
+  @extend .border-bottom-light
+
+.hoc-table__table tbody:last-child td
+  @extend .border-bottom-0
+
+.hoc-table__table thead th
+  @extend .border-bottom-light
+  @extend .fg-black-lighten-15
+
+.background-transparent
+  background-color: transparent
+
+.outline-none
+  outline: none
+
+.balloon-input
+  @extend .position-relative
+  @extend .clearfix
+  @extend .width-50
+
+.balloon-input__input
+  transition: all 0.3s ease-in-out
+  @extend .z-2
+  @extend .outline-none
+  @extend .background-transparent
+  @extend .position-relative
+  @extend .display-inline-block
+  @extend .padding-tb-5
+  @extend .padding-lr-8
+  @extend .width-50
+  @extend .border-light
+  @extend .radius-2
+  text-indent: 60px
+
+.balloon-input__input:focus,
+.balloon-input__input:active
+  text-indent: 0
+
+.balloon-input__label
+  transition: all 0.3s ease-in-out
+  @extend .z-1
+  @extend .fg-white-darken-20
+  @extend .display-inline-block
+  @extend .radius-4
+  @extend .position-absolute
+  @extend .padding-tb-5
+  @extend .padding-lr-8
+  @extend .display-block
+  @extend .left-0
+  @extend .top-4
+
+.balloon-input__label:after
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  top: 100%;
+  left: 50%;
+  margin-left: -3px;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid rgba(122,184,147,0);
+  transition: all .3s ease-in-out;
+
+.balloon-input__input:focus + .balloon-input__label,
+.balloon-input__input:active + .balloon-input__label
+  @extend .fg-white
+  transform: translateY(-40px);
+  text-shadow: 0 1px 0 rgba(19,74,70,.4);
+  background: rgba(122,184,147,1);
+
+  &:after
+    border-top: 4px solid rgba(122,184,147,1)

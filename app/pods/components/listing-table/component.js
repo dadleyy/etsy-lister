@@ -1,13 +1,6 @@
 import Ember from 'ember';
-const {computed} = Ember;
+import layout from 'charcoal/pods/components/listing-table/template';
 
-const Table = Ember.Component.extend({
-
-  listings: computed('delegate.filters.title', function() {
-    let delegate = this.get('delegate');
-    return delegate.listings();
-  })
-
-});
+const Table = Ember.Component.extend({ layout });
 
 export default Table;
