@@ -4,7 +4,7 @@
   .radius-#{$i}
     border-radius: $i + unquote("px")
 
-p, label, input[type="text"], textarea
+p, label, input[type="text"], textarea, a
   font-size: 1.0rem
   line-height: 1.2rem
 
@@ -30,6 +30,15 @@ html, body
 
 .pointer
   cursor: pointer
+
+.button
+  @extend .pointer
+  @extend .radius-3
+  @extend .bg-white-darken-4
+  @extend .fg-black-lighten-10
+  @extend .display-inline-block
+  @extend .padding-lr-6
+  @extend .padding-tb-3
 
 .border-bottom-light
   @extend .border-bottom-1
@@ -71,6 +80,34 @@ html, body
 
 .hoc-table__table tbody:last-child td
   @extend .border-bottom-0
+
+.hoc-table__pagination-container
+  @extend .margin-top-10
+
+.hoc-table__pagination
+  @extend .clearfix
+
+.hoc-table__pagination-right
+  @extend .float-right
+  @extend .display-table
+  @extend .display-table--fixed
+
+.hoc-table__pagination-controls,
+.hoc-table__pagination-count-text
+  @extend .display-table-cell
+  @extend .v-align-middle
+
+.hoc-table__pagination-controls
+  @extend .clearfix
+
+.hoc-table__pagination-control--next,
+.hoc-table__pagination-control--previous
+  @extend .float-left
+  @extend .margin-left-10
+
+.hoc-table__pagination-control-next-button,
+.hoc-table__pagination-control-previous-button
+  @extend .button
 
 .hoc-table__column-header-inner
   @extend .clearfix

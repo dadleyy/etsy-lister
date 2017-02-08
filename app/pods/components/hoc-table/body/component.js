@@ -10,8 +10,8 @@ function uuid() {
   return `-${++id_pool}-`;
 }
 
-const rows = computed({
-  set(key, promise) {
+const promise = computed({
+  set(key, target_promise) {
     const set = this.set.bind(this);
     const get = this.get.bind(this);
     const id = uuid();
@@ -60,7 +60,7 @@ const rows = computed({
       set('complete', true);
     }
 
-    return promise.then(success)
+    return target_promise.then(success)
       .catch(failed)
       .finally(finished);
   }
@@ -68,4 +68,4 @@ const rows = computed({
 
 const pending = not('ready');
 
-export default Ember.Component.extend({tagName, rows, pending});
+export default Ember.Component.extend({tagName, promise, pending});

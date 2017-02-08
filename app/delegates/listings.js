@@ -69,8 +69,10 @@ export default Ember.Object.extend({
         current.shops.push(shop);
       }
 
+      // end case - all other stuff has been loaded
       if(id_list.length === 0) {
-        return deferred.resolve(current.listings.map(toRow));
+        const rows = current.listings.map(toRow);
+        return deferred.resolve({ rows, count: current.count });
       }
 
       const listing_record = store.peekRecord('listing', id_list.shift());
@@ -90,11 +92,11 @@ export default Ember.Object.extend({
 
     function receive(listings) {
       // prepare new relation arrays for our shops and images
-      let images   = [];
-      let shops    = [];
+      let images = [];
+      let shops = [];
 
-      const new_cache = { listings, images, shops };
-      const count = listings.get('length');
+      const { count } = listings.get('meta');
+      const new_cache = { listings, images, shops, count };
 
       if(count === 0) {
         return deferred.resolve([{ empty: true }]);
@@ -104,8 +106,8 @@ export default Ember.Object.extend({
       cache.replace(0, cache.length, [new_cache]);
 
       // loop over each listing, getting their
-      for(let i = 0; i < count; i++) {
-        let {id} = listings.objectAt(i);
+      for(let i = 0, c = listings.get('length'); i < c; i++) {
+        let { id } = listings.objectAt(i);
         id_list.push(id);
       }
 
@@ -118,7 +120,10 @@ export default Ember.Object.extend({
     }
 
     const sort_order = sorting.order ? 'up' : 'down';
-    let query = { limit: 3, sort_on: sorting.rel, sort_order };
+    const { size: limit, page } = pagination;
+    const offset = limit * page;
+
+    let query = { offset, limit, sort_on: sorting.rel, sort_order };
 
     if(filters.get('title')) {
       query.keywords = filters.get('title');

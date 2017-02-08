@@ -1,0 +1,21 @@
+{{#if display.total}}
+<div class="hoc-table__pagination">
+  <div class="hoc-table__pagination-right">
+    <div class="hoc-table__pagination-count-text">
+      <p>{{t 'displaying_x_of_y' x=display.size y=display.total}}</p>
+    </div>
+    <div class="hoc-table__pagination-controls">
+      {{#if controls.previous}}
+      <div class="hoc-table__pagination-control--previous">
+        <a class="hoc-table__pagination-control-previous-button" onClick={{action 'move' -1}}>{{t 'previous'}}</a>
+      </div>
+      {{/if}}
+      {{#if controls.next}}
+      <div class="hoc-table__pagination-control--next">
+        <a class="hoc-table__pagination-control-next-button" onClick={{action 'move' 1}}>{{t 'next'}}</a>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</div>
+{{/if}}

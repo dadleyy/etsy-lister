@@ -14,11 +14,12 @@
         </tr>
       </thead>
       {{yield (hash 
-        row=(component 'hoc-table/body' rows=rows)
-        pending=(component 'hoc-table/pending' promise=rows)
+        row=(component 'hoc-table/body' promise=promise)
+        pending=(component 'hoc-table/pending' promise=promise)
       )}}
     </table>
   </div>
   <div class="hoc-table__pagination-container">
+    {{component 'hoc-table/pagination' promise=promise pagination=(mut pagination)}}
   </div>
 </div>
