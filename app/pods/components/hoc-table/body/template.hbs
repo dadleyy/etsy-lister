@@ -1,7 +1,3 @@
 {{#if ready}}
-  {{#each result as |row|}}
-  <tbody class="hoc-table__row-body">
-    {{yield row}}
-  </tbody>
-  {{/each}}
+  {{#each result as |row|}}{{yield row}}{{/each}}
 {{/if}}

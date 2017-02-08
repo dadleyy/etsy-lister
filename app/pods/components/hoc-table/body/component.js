@@ -4,10 +4,19 @@ const { not } = computed;
 
 const tagName = '';
 
+let id_pool = 0;
+
+function uuid() {
+  return `-${++id_pool}-`;
+}
+
 const rows = computed({
   set(key, promise) {
     const set = this.set.bind(this);
     const get = this.get.bind(this);
+    const id = uuid();
+
+    set('current_request', id);
 
     set('complete', null);
     set('result', null);
@@ -15,6 +24,12 @@ const rows = computed({
     set('ready', false);
 
     function success(result) {
+      const current = get('current_request');
+
+      if(get('isDestroyed') === true || current !== id) {
+        return false;
+      }
+
       set('failed', false);
       set('ready', true);
 
@@ -23,6 +38,12 @@ const rows = computed({
     }
 
     function failed(error) {
+      const current = get('current_request');
+
+      if(get('isDestroyed') === true || current !== id) {
+        return false;
+      }
+
       set('failed', true);
       set('ready', false);
 
@@ -30,9 +51,13 @@ const rows = computed({
     }
 
     function finished() {
-      if(get('isDestroyed') !== true) {
-        set('complete', true);
+      const current = get('current_request');
+
+      if(get('isDestroyed') === true || current !== id) {
+        return false;
       }
+
+      set('complete', true);
     }
 
     return promise.then(success)

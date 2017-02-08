@@ -23,14 +23,16 @@ export default Ember.Object.extend({
   columns() {
     const i18n = this.get('i18n');
     return [
-      { text: i18n.t('listing_id'), rel: 'listing_id', style: 'width: 12%;' },
-      { text: i18n.t('title'), rel: 'title', style: 'width: 40%;' },
-      { text: i18n.t('shop'), rel: 'shop', style: 'width: 26%;' },
-      { text: i18n.t('thumbnail'), rel: 'thumbnail', style: 'width: 12%;' }
+      { text: i18n.t('listing_id'), rel: 'listing_id', style: 'width: 10%;' },
+      { text: i18n.t('title'), rel: 'title', style: 'width: 35%;' },
+      { text: i18n.t('shop'), rel: 'shop', style: 'width: 20%;' },
+      { text: i18n.t('date_created'), rel: 'created', style: 'width: 15%;', sortable: true },
+      { text: i18n.t('price'), rel: 'price', style: 'width: 8%;', sortable: true, align: 'right' },
+      { text: i18n.t('thumbnail'), rel: 'thumbnail', style: 'width: 13%', align: 'center' }
     ];
   },
 
-  rows() {
+  rows({ pagination, sorting }) {
     const filters  = this.get('filters');
     const cache    = this.get('cache');
     const store    = this.get('store');
@@ -115,7 +117,8 @@ export default Ember.Object.extend({
       return deferred.reject(err);
     }
 
-    let query = {limit: 3};
+    const sort_order = sorting.order ? 'up' : 'down';
+    let query = { limit: 3, sort_on: sorting.rel, sort_order };
 
     if(filters.get('title')) {
       query.keywords = filters.get('title');

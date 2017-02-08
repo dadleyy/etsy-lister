@@ -1,5 +1,6 @@
 export default {
   'about'            : 'About',
+  'date_created'     : 'Date Created',
   'home'             : 'Home',
   'listings'         : 'Listings',
   'listing_info'     : 'Listing Info',
@@ -8,8 +9,10 @@ export default {
   'loading'          : 'Loading',
   'loading_listings' : 'Loading Listings, please wait...',
   'no_results'       : 'No Results',
+  'price'            : 'Price',
   'search'           : 'Search',
   'shop'             : 'Shop',
   'thumbnail'        : 'Thumbnail',
-  'title'            : 'Title'
+  'title'            : 'Title',
+  'unknown'          : 'Unknown',
 };

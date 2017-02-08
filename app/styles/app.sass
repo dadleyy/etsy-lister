@@ -5,8 +5,8 @@
     border-radius: $i + unquote("px")
 
 p, label, input[type="text"], textarea
-  font-size: 1.1rem
-  line-height: 1.1rem
+  font-size: 1.0rem
+  line-height: 1.2rem
 
 strong, b
   font-weight: 400
@@ -20,9 +20,16 @@ html, body
   *
     box-sizing: border-box
 
+.icon:before
+  font-size: 1.1rem
+  line-height: 1.2rem
+
 .oc
-  max-width: 960px
+  max-width: 80vw
   margin: 0 auto
+
+.pointer
+  cursor: pointer
 
 .border-bottom-light
   @extend .border-bottom-1
@@ -49,21 +56,47 @@ html, body
   @extend .border-color-white-darken-10
 
 .hoc-table__table
+  @extend .align-left
   @extend .display-table
   @extend .display-table--fixed
   @extend .width-50
 
-.hoc-table__table thead th,
-.hoc-table__table tbody td
+.hoc-table__table tbody td,
+.hoc-table__column-header-inner
   @extend .padding-tb-5
   @extend .padding-lr-10
-  @extend .align-left
 
 .hoc-table__table tbody td
   @extend .border-bottom-light
 
 .hoc-table__table tbody:last-child td
   @extend .border-bottom-0
+
+.hoc-table__column-header-inner
+  @extend .clearfix
+  @extend .border-right-1
+  @extend .border-color-white-darken-10
+
+.hoc-table__table thead th:last-child .hoc-table__column-header-inner
+  @extend .border-right-0
+
+.hoc-table__column-header[data-sortable="true"]
+  @extend .pointer
+
+.hoc-table__column-header[data-align="right"]
+  @extend .align-right
+
+.hoc-table__column-header[data-align="center"]
+  @extend .align-center
+
+.hoc-table__indicator-container
+  @extend .float-right
+  @extend .margin-left-10
+
+.hoc-table__column-header[data-align="right"] .hoc-table__indicator-container
+  @extend .float-left
+  @extend .margin-right-10
+  @extend .margin-left-0
 
 .hoc-table__table thead th
   @extend .border-bottom-light

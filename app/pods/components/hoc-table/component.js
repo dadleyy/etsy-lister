@@ -7,9 +7,10 @@ const columns = computed('delegate', function() {
   return delegate.columns();
 });
 
-const rows = computed('delegate.{filters,pagination,sorting}', function() {
-  return this.get('delegate').rows();
+const rows = computed('delegate.{filters,pagination,sorting}', 'sorting', function() {
+  const sorting = this.get('sorting');
+  const pagination = this.get('pagination');
+  return this.get('delegate').rows({ sorting, pagination });
 });
-
 
 export default Ember.Component.extend({ layout, columns, rows });

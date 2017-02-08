@@ -1,0 +1,17 @@
+<div class="hoc-table__column-header" data-sortable="{{column.sortable}}" data-align="{{column.align}}">
+  <div class="hoc-table__column-header-inner" onClick={{if column.sortable (action 'sort')}}>
+    {{#if active}}
+      <div class="hoc-table__indicator-container">
+        {{#if ascending}}
+          <i class="icon ion-arrow-down-b fg-2 darken-3" />
+        {{/if}}
+        {{#if descending}}
+          <i class="icon ion-arrow-up-b fg-2 darken-3" />
+        {{/if}}
+      </div>
+    {{/if}}
+    <div class="clearfix overflow-hidden">
+      <p>{{column.text}}</p>
+    </div>
+  </div>
+</div>
