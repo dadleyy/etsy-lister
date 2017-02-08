@@ -1,6 +1,6 @@
 {
   "name": "charcoal",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "emberjs playground",
   "license": "MIT",
   "author": "Danny Hadley <dadleyy@gmail.com>",
@@ -14,7 +14,7 @@
     "g": "ember g",
     "build": "ember build",
     "start": "ember server",
-    "dev:server": "node api/server.js",
+    "dev:api": "node api/server.js",
     "vendor:install": "bower i",
     "test": "ember test"
   },

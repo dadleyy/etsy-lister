@@ -26,8 +26,9 @@ const actions = {
     const { rel } = column;
     let { order } = current;
 
-    if(current.rel === column.rel)
+    if(current.rel === column.rel) {
       order = !order;
+    }
 
     this.set('sorting', { order, rel });
   }
