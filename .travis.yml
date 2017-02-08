@@ -6,9 +6,9 @@ install:
   - npm install
   - npm run vendor:install
 script:
-  - npm run build -- --prod --output-path ./dist/application
+  - npm run build -- --prod --output-path ./dist/charcoal
   - npm test
-  - tar -cvzf ./dist/charcoal.ui.tar.gz -C ./dist/application .
+  - tar -cvzf ./dist/charcoal.ui.tar.gz -C ./dist ./charcoal
 deploy:
   provider: releases
   api_key:
