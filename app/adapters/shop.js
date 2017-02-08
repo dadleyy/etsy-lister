@@ -1,9 +1,11 @@
 import DS from 'ember-data';
+import ENV from 'charcoal/config/environment';
 
 export default DS.JSONAPIAdapter.extend({
 
   urlForQuery(query) {
-    return query.listing ? `/v2/shops/listing/${query.listing}` : `/v2/shops`;
+    const {API_HOME} = ENV;
+    return query.listing ? `${API_HOME}/shops/listing/${query.listing}` : `${API_HOME}/shops`;
   }
 
 });

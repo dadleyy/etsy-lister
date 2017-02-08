@@ -25,6 +25,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.API_HOME = '/v2';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -40,6 +41,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.API_HOME = '/api';
   }
 
   return ENV;
