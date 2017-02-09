@@ -42,7 +42,7 @@ function open(component, placement, props) {
   return id;
 }
 
-function close(id) {
+function close() {
   const listeners = this.get('listeners');
   const pool = this.get('pool');
 
