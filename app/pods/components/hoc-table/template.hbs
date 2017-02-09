@@ -3,7 +3,7 @@
     <table class="hoc-table__table">
       <colgroup>
         {{#each columns as |column|}}
-        <col class="{{column.rel}}" style={{column.style}} />
+          <col class="{{column.rel}}" style={{{column.style}}} />
         {{/each}}
       </colgroup>
       <thead>

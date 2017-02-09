@@ -3,16 +3,12 @@ import Ember from 'ember';
 const { inject, computed, Component } = Ember;
 
 const options = computed(function() {
-  const delegate = this.get('props.delegate');
+  const delegate = this.get('delegate');
   return delegate && typeof delegate.sizes === 'function' ? delegate.sizes() : [];
 });
 
 const actions = {
   select(size) {
-    const popups = this.get('popups');
-    const { update } = this.get('props');
-    update(size);
-    popups.close();
   }
 };
 

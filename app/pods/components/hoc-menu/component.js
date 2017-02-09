@@ -1,16 +1,24 @@
 import Ember from 'ember';
 
-const { Component, inject } = Ember;
+const { computed, Component, inject } = Ember;
 
-const actions = {
-  open() {
-    const body = this.get('body');
-    const popups = this.get('popups');
-    const props = this.get('props');
-    const { element } = this;
-    const placement = element.getBoundingClientRect();
-    popups.open(body, placement, props);
-  }
-};
+function init() {
+  this._super(...arguments);
+  const popups = this.get('popups');
+  const handle = popups.allocate();
+  this.set('handle', handle);
+}
 
-export default Component.extend({ popups: inject.service(), actions });
+function willDestroyElement() {
+  const handle = this.get('handle');
+  const popups =this.get('popups');
+  console.log('cleaning!');
+  popups.free(handle);
+  this.set('handle', null);
+}
+
+export default Component.extend({
+  classNames: ['hoc-menu'],
+  init, willDestroyElement,
+  popups: inject.service() 
+});

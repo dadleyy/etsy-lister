@@ -7,11 +7,13 @@
           <p>{{t 'displaying'}}</p>
         </aside>
         <aside class="hoc-table__size-menu">
-          {{#hoc-menu
-            body=(component 'hoc-table/pagination-menu')
-            props=(hash update=(action 'update') delegate=delegate)
-          }}
-          <span><span class="margin-right-5">{{display.size}}</span><i class="icon ion-navicon fg-0" /></span>
+          {{#hoc-menu as |menu|}}
+            {{#menu.button}}
+            <span><span class="margin-right-5">{{display.size}}</span><i class="icon ion-navicon fg-0" /></span>
+            {{/menu.button}}
+            {{#menu.body}}
+              {{hoc-table/pagination-menu pagination=(mut pagination) delegate=delegate}}
+            {{/menu.body}}
           {{/hoc-menu}}
         </aside>
         <aside>

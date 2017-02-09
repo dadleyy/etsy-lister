@@ -2,59 +2,124 @@ import Ember from 'ember';
 
 const { run, inject, Service } = Ember;
 
-const ESCAPE_KEY = 27;
-
-const uuid = (function() {
-  let head = 0;
-  return () => `-${++head}-`;
-})();
-
-function mount() {
-  this.set('pool', []);
+function mount(root) {
+  const { active, idle } = this.get('pool') || { active: [], idle: [] };
+  this.set('pool', { active, idle });
+  this.set('active', active.length >= 1);
+  this.set('root', root);
 }
 
-function open(component, placement, props) {
-  const pool = this.get('pool');
-  const id = uuid();
+function allocate() {
+  const idle = this.get('pool.idle');
+  const id = this.get('uuid').generate();
+  const get = this.get.bind(this);
 
-  const escape = (evt) => {
-    if(evt.keyCode !== ESCAPE_KEY) {
-      return;
+  const handle = {
+    id,
+
+    get open() {
+      const { active } = get('pool');
+
+      for(let i = 0, c = active.length; i < c; i ++) {
+        const { handle } = active[i];
+
+        if(handle.id === this.id) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  };
+
+  idle.push(handle);
+  return handle;
+}
+
+function free(target) {
+  const pool = this.get('pool');
+  const active = pool.active.filter(function({ handle }) { return handle.id !== target.id; });
+  const idle = pool.idle.filter(function({ id }) { return id !== target.id; });
+  this.set('pool', { active, idle });
+}
+
+function close(target) {
+  const { active, idle } = this.get('pool');
+  let found = null;
+
+  for(let i = 0, c = active.length; i < c; i++) {
+    const { handle } = active[i];
+
+    if(handle.id !== target.id) {
+      continue;
     }
 
-    return this.close();
-  };
-
-  const after = () => {
-    this.set('opening', false);
-  };
-
-  if(!pool || pool.length === 0) {
-    const keys = this.get('keyboard');
-    const listeners = { keys: keys.keyup(escape) };
-    this.set('listeners', listeners);
+    found = i;
+    break;
   }
 
-  this.set('opening', true);
-  this.set('pool', [{ id, component, props, placement }]);
-
-  run.next(after);
-  return id;
-}
-
-function close() {
-  const listeners = this.get('listeners');
-  const pool = this.get('pool');
-
-  if(pool.length === 0) {
+  if(found === null) {
     return -1;
   }
 
-  this.get('keyboard').off(listeners.keys);
-  this.set('pool', []);
+  let [ match ] = active.splice(found, 1);
+  idle.push(match.handle);
+  this.set('pool', { active, idle });
+  this.set('active', active.length);
 }
 
-export default Service.extend({ open, close, mount, 
-  keyboard: inject.service(),
-  mouse: inject.service() 
+function open(handle, bounding) {
+  const { active, idle } = this.get('pool');
+  let found = null;
+
+  if(idle.length === 0) {
+    return -1;
+  }
+
+  for(var i = 0, c = idle.length; i < c; i++) {
+    const { id } = idle[i];
+
+    if(id !== handle.id) {
+      continue;
+    }
+
+    found = i;
+    break;
+  }
+
+  if(found === null) {
+    return -1;
+  }
+
+  let [ target ] = idle.splice(found, 1);
+  active.push({ handle: target, bounding });
+
+  this.set('pool', { active, idle });
+  this.set('active', active.length);
+  this.set('opening', true);
+
+  function finish() {
+    this.set('opening', false);
+  }
+
+  run.next(this, finish);
+}
+
+function bounding(target) {
+  const { active } = this.get('pool');
+
+  for(let i = 0, c = active.length; i < c; i++) {
+    const { handle, bounding } = active[i];
+
+    if(handle.id === target.id) {
+      return bounding;
+    }
+  }
+
+  return null;
+}
+
+export default Service.extend({
+  allocate, free, mount, open, bounding, close,
+  uuid: inject.service()
 });

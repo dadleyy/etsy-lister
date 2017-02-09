@@ -1,3 +1,6 @@
-<div class="hoc-menu">
-  <a class="hoc-menu__toggle" onClick={{action 'open'}}>{{yield}}</a>
+<div class="hoc-menu__container">
+  {{yield (hash
+    body=(component 'hoc-menu/body' handle=handle)
+    button=(component 'hoc-menu/button' handle=handle)
+  )}}
 </div>
