@@ -5,7 +5,7 @@ const { computed } = Ember;
 
 const tagName = 'footer';
 
-const promise = computed('promise', {
+const promise = computed('promise', 'delegate', {
   set(key, target_promise) {
     const set = this.set.bind(this);
     const get = this.get.bind(this);
@@ -16,7 +16,7 @@ const promise = computed('promise', {
       const { count } = result;
       const { page, size } = get('pagination') || {};
 
-      if(!count) {
+      if(!count || get('isDestroyed') === true) {
         return;
       }
 
@@ -34,6 +34,11 @@ const promise = computed('promise', {
 });
 
 const actions = {
+
+  update(size) {
+    const { page } = this.get('pagination');
+    this.set('pagination', { size, page });
+  },
 
   move(amount) {
     const { size, page } = this.get('pagination');

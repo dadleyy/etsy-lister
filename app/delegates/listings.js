@@ -20,6 +20,10 @@ export default Ember.Object.extend({
     this.set('filters', filters);
   },
 
+  sizes() {
+    return [3, 5, 10];
+  },
+
   columns() {
     const i18n = this.get('i18n');
     return [

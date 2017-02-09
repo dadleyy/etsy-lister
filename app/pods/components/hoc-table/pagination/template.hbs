@@ -1,8 +1,23 @@
 {{#if display.total}}
 <div class="hoc-table__pagination">
   <div class="hoc-table__pagination-right">
-    <div class="hoc-table__pagination-count-text">
-      <p>{{t 'displaying_x_of_y' x=display.size y=display.total}}</p>
+    <div class="hoc-table__pagination-count-info">
+      <div class="hoc-table__pagination-count-info-inner">
+        <aside>
+          <p>{{t 'displaying'}}</p>
+        </aside>
+        <aside class="hoc-table__size-menu">
+          {{#hoc-menu
+            body=(component 'hoc-table/pagination-menu')
+            props=(hash update=(action 'update') delegate=delegate)
+          }}
+          <span><span class="margin-right-5">{{display.size}}</span><i class="icon ion-navicon fg-0" /></span>
+          {{/hoc-menu}}
+        </aside>
+        <aside>
+          <p>{{t 'of_x' x=display.total}}</p>
+        </aside>
+      </div>
     </div>
     <div class="hoc-table__pagination-controls">
       {{#if controls.previous}}

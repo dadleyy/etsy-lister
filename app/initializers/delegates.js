@@ -1,7 +1,7 @@
-import Delegate from 'charcoal/delegates/listings';
+import ListingDelegate from 'charcoal/delegates/listings'; 
 
 export function initialize(application) {
-  application.register('delegates:listings', Delegate, {singleton: false});
+  application.register('delegates:listings', ListingDelegate, {singleton: false});
 }
 
 export default {

@@ -20,6 +20,27 @@ html, body
   *
     box-sizing: border-box
 
+div[data-global-layer="popups"]
+  @extend .position-fixed
+  @extend .top-0
+  @extend .left-0
+  @extend .z-50
+  @extend .width-50
+  @extend .height-0
+
+div[data-global-layer="popups"] .popup-manager
+  @extend .position-absolute
+  @extend .top-0
+  @extend .left-0
+  @extend .width-50
+  @extend .height-0
+
+div[data-global-layer="popups"] .popup-manager__popup-container
+  @extend .position-absolute
+  @extend .bg-white
+  @extend .border-light
+  @extend .radius-3
+  
 .icon:before
   font-size: 1.1rem
   line-height: 1.2rem
@@ -60,6 +81,9 @@ html, body
 .display-table--fixed
   table-layout: fixed
 
+.hoc-menu__toggle
+  @extend .button
+
 .hoc-table__table-container 
   @extend .border-1
   @extend .border-color-white-darken-10
@@ -93,9 +117,18 @@ html, body
   @extend .display-table--fixed
 
 .hoc-table__pagination-controls,
-.hoc-table__pagination-count-text
+.hoc-table__pagination-count-info
   @extend .display-table-cell
   @extend .v-align-middle
+
+.hoc-table__pagination-count-info-inner
+  @extend .display-table
+  @extend .display-table--fixed
+
+.hoc-table__pagination-count-info aside
+  @extend .display-table-cell
+  @extend .v-align-middle
+  @extend .padding-lr-3
 
 .hoc-table__pagination-controls
   @extend .clearfix
@@ -142,6 +175,16 @@ html, body
 
 .background-transparent
   background-color: transparent
+
+.hoc-table__size-menu-option
+  transition: all 300ms ease
+  @extend .padding-tb-5
+  @extend .padding-lr-10
+  @extend .align-right
+  @extend .pointer
+
+.hoc-table__size-menu-option:hover
+  @extend .bg-white-darken-4
 
 .outline-none
   outline: none

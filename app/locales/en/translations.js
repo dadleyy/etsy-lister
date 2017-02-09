@@ -1,6 +1,7 @@
 export default {
   'about'             : 'About',
   'date_created'      : 'Date Created',
+  'displaying'        : 'Displaying',
   'displaying_x_of_y' : 'Displaying {{x}} of {{y}} results',
   'home'              : 'Home',
   'listings'          : 'Listings',
@@ -11,6 +12,7 @@ export default {
   'loading_listings'  : 'Loading Listings, please wait...',
   'next'              : 'Next',
   'no_results'        : 'No Results',
+  'of_x'              : 'of {{x}} results',
   'previous'          : 'Previous',
   'price'             : 'Price',
   'search'            : 'Search',
