@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { computed, Component, inject } = Ember;
+const { Component, inject } = Ember;
 
 function init() {
   this._super(...arguments);
@@ -12,7 +12,6 @@ function init() {
 function willDestroyElement() {
   const handle = this.get('handle');
   const popups =this.get('popups');
-  console.log('cleaning!');
   popups.free(handle);
   this.set('handle', null);
 }

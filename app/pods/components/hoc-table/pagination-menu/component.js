@@ -9,6 +9,8 @@ const options = computed(function() {
 
 const actions = {
   select(size) {
+    const { page } = this.get('pagination');
+    this.set('pagination', { size, page });
   }
 };
 

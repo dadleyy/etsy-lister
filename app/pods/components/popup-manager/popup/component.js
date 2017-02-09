@@ -46,13 +46,7 @@ function willRender() {
   run.schedule('afterRender', send);
 }
 
-function willUpdate() {
-  this._super(...arguments);
-
-  if(this.get('display') === true) {
-    return false;
-  }
-
+function clean() {
   const { element } = this;
   let head = this.get('head');
   let tail = this.get('tail');
@@ -78,6 +72,21 @@ function willUpdate() {
   this.set('sent', false);
 }
 
+function willUpdate() {
+  this._super(...arguments);
+
+  if(this.get('display') === true) {
+    return false;
+  }
+
+  clean.call(this);
+}
+
+function willDestroyElement() {
+  this._super(...arguments);
+  clean.call(this);
+}
+
 const display = computed('popups.active', 'popups.{active}', function() {
   return this.get('popups.active') && this.get('handle').open;
 });
@@ -97,7 +106,7 @@ const style = computed('display', function() {
 export default Component.extend({
   classNames: ['popup-manager__wormhole'],
   init, style, display,
-  willRender, willUpdate,
+  willRender, willUpdate, willDestroyElement,
   popups: inject.service(),
   doc: inject.service('-document')
 });
