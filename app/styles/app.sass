@@ -1,12 +1,19 @@
 @import "bases"
-
-@for $i from 0 through 5
-  .radius-#{$i}
-    border-radius: $i + unquote("px")
+@import "base-618fef"
 
 p, label, input[type="text"], textarea, a
   font-size: 1.0rem
   line-height: 1.2rem
+
+.underline
+  text-decoration: underline
+
+.no-underline
+  text-decoration: none
+
+a[href]
+  @extend .fg-0.char.darken-3
+  @extend .no-underline
 
 strong, b
   font-weight: 400
@@ -45,8 +52,20 @@ div[data-global-layer="popups"] .popup-manager__popup-container
   font-size: 1.1rem
   line-height: 1.2rem
 
+@for $i from 0 through 5
+  .radius-#{$i}
+    border-radius: $i + unquote("px")
+
+@for $i from 0 through 10
+  $fs: ($i * 0.2) + 1
+  $fsi: $i + 1
+
+  .fs-#{$fsi}, .fs-#{$fsi}:before
+    font-size: $fs + unquote("rem")
+
 .oc
-  max-width: 80vw
+  max-width: 90vw
+  min-width: 1080px
   margin: 0 auto
 
 .pointer
