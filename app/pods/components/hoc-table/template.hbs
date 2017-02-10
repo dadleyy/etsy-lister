@@ -15,7 +15,7 @@
       </thead>
       {{yield (hash 
         row=(component 'hoc-table/body' promise=promise)
-        pending=(component 'hoc-table/pending' promise=promise)
+        pending=(component 'deferred/pending-placeholder' promise=promise)
       )}}
     </table>
   </div>

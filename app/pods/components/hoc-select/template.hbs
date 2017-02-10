@@ -1,0 +1,16 @@
+{{#hoc-menu as |menu|}}
+  {{#menu.button}}
+    {{yield (hash button=(component 'hoc-select/button'))}}
+  {{/menu.button}}
+
+  {{#menu.body}}
+  <div class="hoc-select__body">
+    {{yield (hash 
+      search=(component 'hoc-select/search' query=(mut query) delegate=delegate)
+      item=(component 'hoc-select/body' promise=promise delegate=delegate)
+      pending=(component 'deferred/pending-placeholder' promise=promise)
+    )}}
+  </div>
+  {{/menu.body}}
+{{/hoc-menu}}
+

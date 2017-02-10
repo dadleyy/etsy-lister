@@ -1,0 +1,22 @@
+{{#hoc-select delegate=delegate as |select|}}
+  {{select.search}}
+
+  {{#select.pending}}
+  <div class="padding-tb-3 padding-lr-10">
+    <p>{{t 'loading_categories'}}</p>
+  </div>
+  {{/select.pending}}
+
+  {{#select.button}}
+    <span class="clearfix display-block">
+      <span class="float-left margin-right-5">{{text}}</span>
+      <i class="icon ion-navicon fg-0" />
+    </span>
+  {{/select.button}}
+
+  {{#select.item as |item|}}
+  <div class="padding-tb-5 padding-lr-10">
+    <p>{{item.page_title}}</p>
+  </div>
+  {{/select.item}}
+{{/hoc-select}}

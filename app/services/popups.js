@@ -2,15 +2,19 @@ import Ember from 'ember';
 
 const { run, inject, Service } = Ember;
 
+function empty() {
+  return { active: [], idle: [] };
+}
+
 function mount(root) {
-  const { active, idle } = this.get('pool') || { active: [], idle: [] };
+  const { active, idle } = this.get('pool') || empty();
   this.set('pool', { active, idle });
   this.set('active', active.length >= 1);
   this.set('root', root);
 }
 
 function allocate() {
-  const idle = this.get('pool.idle');
+  const { active, idle } = this.get('pool') || empty();
   const id = this.get('uuid').generate();
   const get = this.get.bind(this);
 
@@ -33,10 +37,13 @@ function allocate() {
   };
 
   idle.push(handle);
+
+  this.set('pool', { active, idle });
   return handle;
 }
 
 function free(target) {
+  close.call(this, target);
   const pool = this.get('pool');
   const active = pool.active.filter(function({ handle }) { return handle.id !== target.id; });
   const idle = pool.idle.filter(function({ id }) { return id !== target.id; });
@@ -74,6 +81,12 @@ function open(handle, bounding) {
 
   if(idle.length === 0) {
     return -1;
+  }
+
+  const [ current ] = active;
+
+  if(current) {
+    close.call(this, current.handle);
   }
 
   for(var i = 0, c = idle.length; i < c; i++) {

@@ -27,6 +27,10 @@ html, body
   *
     box-sizing: border-box
 
+.input-padding
+  @extend .padding-tb-5
+  @extend .padding-lr-8
+
 div[data-global-layer="popups"]
   @extend .position-fixed
   @extend .top-0
@@ -80,8 +84,7 @@ div[data-global-layer="popups"] .popup-manager__popup-container
   @extend .bg-white-darken-4
   @extend .fg-black-lighten-10
   @extend .display-inline-block
-  @extend .padding-lr-6
-  @extend .padding-tb-3
+  @extend .input-padding
 
 .border-bottom-light
   @extend .border-bottom-1
@@ -216,15 +219,31 @@ div[data-global-layer="popups"] .popup-manager__popup-container
   @extend .clearfix
   @extend .width-50
 
+.select-item
+  @extend .padding-lr-5
+  @extend .padding-tb-3
+
+.transition-ease
+  transition: all 300ms ease
+
+.bg-shadowy
+  background-color: rgba(0,0,0,0.1)
+
+.hoc-select__item
+  @extend .pointer
+  @extend .transition-ease
+
+.hoc-select__item:hover
+  @extend .bg-shadowy
+
 .balloon-input__input
   transition: all 0.3s ease-in-out
   @extend .z-2
   @extend .outline-none
+  @extend .input-padding
   @extend .background-transparent
   @extend .position-relative
   @extend .display-inline-block
-  @extend .padding-tb-5
-  @extend .padding-lr-8
   @extend .width-50
   @extend .border-light
   @extend .radius-2
@@ -232,6 +251,16 @@ div[data-global-layer="popups"] .popup-manager__popup-container
 
 .balloon-input__input:focus,
 .balloon-input__input:active
+  text-indent: 0
+
+.hoc-select__body .hoc-select__search
+  @extend .margin-tb-5
+  @extend .margin-lr-10
+
+.hoc-select__search input[type="text"]
+  @extend .balloon-input__input
+
+.hoc-select__body .hoc-select__search input[type="text"]
   text-indent: 0
 
 .balloon-input__label

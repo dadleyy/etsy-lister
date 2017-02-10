@@ -1,6 +1,15 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Delegate from 'charcoal/delegates/table';
+import Ember from 'ember';
+const { RSVP: deferred } = Ember;
+
+const Delegate = Ember.Object.extend({ 
+  rows() {
+    return deferred.resolve({ rows: [], count: 0});
+  },
+  columns() {
+  }
+});
 
 moduleForComponent('hoc-table', 'Integration | Component | hoc table', {
   integration: true

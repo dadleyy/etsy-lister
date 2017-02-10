@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 const { Component, inject } = Ember;
 
+const ELEMENT_NODE_TYPE = 1;
+
 function willDestroyElement() {
   const mouse = this.get('mouse');
   const { mouse: id } = this.get('listeners');
@@ -20,16 +22,33 @@ function init() {
       return false;
     }
 
-    const [ latest ] = active;
-    const { bounding } = latest;
-    const x = bounding.left < evt.clientX && bounding.right > evt.clientX;
-    const y = bounding.top < evt.clientY && bounding.bottom > evt.clientY;
+    const { clientX: ex, clientY: ey } = evt;
+    const { childNodes: children } = this.element;
 
-    if(x && y) {
-      return false;
+    for(let i = 0, c = children.length; i < c; i++) {
+      const { nodeType: type } = children[i];
+
+      if(type !== ELEMENT_NODE_TYPE) {
+        continue;
+      }
+
+      const bounding = children[i].getBoundingClientRect();
+
+      const x = bounding.left < ex && bounding.right > ex;
+      const y = bounding.top < ey && bounding.bottom > ey;
+
+      if(x && y) {
+        continue;
+      }
+
+      const [{ handle }] = active;
+
+      if(!handle) {
+        continue;
+      }
+
+      popups.close(handle);
     }
-
-    return x && y ? false : popups.close(latest.handle);
   };
 
   const listeners = { mouse: mouse.click(check) };

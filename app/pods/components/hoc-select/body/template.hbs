@@ -1,0 +1,7 @@
+{{#if ready}}
+  {{#each result as |item|}}
+    <div class="hoc-select__item" onClick={{action 'select' item}} >
+      {{yield item}}
+    </div>
+  {{/each}}
+{{/if}}

@@ -1,23 +1,14 @@
 import Ember from 'ember';
 
-const ListingFilters = Ember.Object.extend({
-
-  copy() {
-    const title = this.get('title');
-    return ListingFilters.create({ title });
-  }
-
-});
-
-export default Ember.Object.extend({
+export default Ember.Service.extend({
+  singleton: false,
   store: Ember.inject.service(),
   i18n: Ember.inject.service(),
   deferred: Ember.inject.service(),
 
   init() {
-    const filters = ListingFilters.create({});
-    this.set('cache', []);
-    this.set('filters', filters);
+    this.set('filters', { });
+    this.set('cache', [ ]);
   },
 
   sizes() {
@@ -129,8 +120,12 @@ export default Ember.Object.extend({
 
     let query = { offset, limit, sort_on: sorting.rel, sort_order };
 
-    if(filters.get('title')) {
-      query.keywords = filters.get('title');
+    if(filters.title) {
+      query.keywords = filters.title;
+    }
+
+    if(filters.category) {
+      query.category = filters.category;
     }
 
     return store.query('listing', query).then(receive).catch(failed);

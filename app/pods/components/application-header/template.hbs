@@ -1,8 +1,11 @@
 <header class="padding-tb-15 border-bottom-light">
   <section class="oc clearfix">
     <div class="float-right">
-      <div class="nav-list clearfix">
-        <div class="float-left">
+      <div class="display-table display-table--fixed">
+        <div class="display-table-cell v-align-middle padding-right-10">
+          {{#link-to 'about'}}{{t 'about'}}{{/link-to}}
+        </div>
+        <div class="display-table-cell v-align-middle">
           <a href="https://github.com/dadleyy/charcoal">
             <i class="icon fs-5 ion-social-github fg-0" />
           </a>
@@ -10,7 +13,7 @@
       </div>
     </div>
     <div class="float-left">
-      <div class="">{{#link-to 'index'}}{{t 'home'}}{{/link-to}}</div>
+      <div class="float-left">{{#link-to 'index'}}{{t 'home'}}{{/link-to}}</div>
     </div>
   </section>
 </header>
