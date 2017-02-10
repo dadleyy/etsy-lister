@@ -1,5 +1,7 @@
 # charcoal [![Build Status](https://travis-ci.org/dadleyy/charcoal.svg?branch=master)](https://travis-ci.org/dadleyy/charcoal)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/dadleyy/charcoal.svg)](https://greenkeeper.io/)
+
 A playground for [ember](http://emberjs.com). The code in this application is inspired by the *"delegate driven"* component api design approach that [hoctable](https://github.com/dadleyy/hoctable) was build on. Instead of high order components however, this codebase takes advantage of ember's [contextual component](http://emberjs.com/blog/2016/01/15/ember-2-3-released.html#toc_contextual-components) with [deferred content](https://github.com/danmcclain/ember-deferred-content). The pagination dropdown is built using a menu + popup service inspired by [`ember-wormhole`](https://github.com/yapplabs/ember-wormhole).
 
 ### Setup + Running
