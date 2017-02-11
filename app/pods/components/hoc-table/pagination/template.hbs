@@ -7,14 +7,20 @@
           <p>{{t 'displaying'}}</p>
         </aside>
         <aside class="hoc-table__size-menu">
-          {{#hoc-menu as |menu|}}
-            {{#menu.button}}
-            <span><span class="margin-right-5">{{display.size}}</span><i class="icon ion-navicon fg-0" /></span>
-            {{/menu.button}}
-            {{#menu.body}}
-              {{hoc-table/pagination-menu pagination=(mut pagination) delegate=delegate}}
-            {{/menu.body}}
-          {{/hoc-menu}}
+          {{#hoc-select delegate=sizeDelegate as |select|}}
+            {{#select.button}}
+              <span class="display-block clearfix">
+                <span class="margin-right-5">{{display.size}}</span>
+                <i class="icon ion-navicon fg-0" />
+              </span>
+            {{/select.button}}
+
+            {{#select.item as |item|}}
+            <div class="clearfix padding-tb-5 padding-lr-10">
+              <p>{{item}}</p>
+            </div>
+            {{/select.item}}
+          {{/hoc-select}}
         </aside>
         <aside>
           <p>{{t 'of_x' x=display.total}}</p>

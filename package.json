@@ -1,9 +1,12 @@
 {
   "name": "charcoal",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "emberjs playground",
   "license": "MIT",
-  "author": "Danny Hadley <dadleyy@gmail.com>",
+  "author": {
+    "name": "Danny Hadley",
+    "email": "<dadleyy@gmail.com>"
+  },
   "homepage": "https://github.com/dadleyy/charcoal",
   "directories": {
     "doc": "doc",

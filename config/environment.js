@@ -1,7 +1,9 @@
 /* jshint node: true */
+const pkg = require('../package.json');
 
 module.exports = function(environment) {
   var ENV = {
+    author          : pkg.author && pkg.author.name ? pkg.author.name : pkg.author,
     modulePrefix    : 'charcoal',
     podModulePrefix : 'charcoal/pods',
     environment     : environment,

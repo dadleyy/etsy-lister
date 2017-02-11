@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from 'charcoal/pods/components/hoc-table/pagination/template';
 
-const { computed } = Ember;
+const { inject, computed } = Ember;
 
 const tagName = 'footer';
 
@@ -33,6 +33,24 @@ const promise = computed('promise', 'delegate', {
   }
 });
 
+function init() {
+  this._super(...arguments);
+  const deferred = this.get('deferred');
+
+  const options = () => {
+    let delegate = this.get('delegate');
+    let sizes = delegate.sizes();
+    return deferred.resolve(sizes);
+  };
+
+  const select = (size) => {
+    const { page } = this.get('pagination');
+    this.set('pagination', { size, page });
+  };
+
+  this.set('sizeDelegate', { options, select });
+}
+
 const actions = {
 
   update(size) {
@@ -47,4 +65,7 @@ const actions = {
 
 };
 
-export default Ember.Component.extend({ layout, promise, tagName, actions });
+export default Ember.Component.extend({
+  deferred: inject.service(),
+  layout, promise, tagName, actions, init
+});
