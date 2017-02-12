@@ -1,5 +1,10 @@
 @import "bases"
-@import "base-618fef"
+@import "base-4392f1"
+
+@mixin calc($property, $expression)
+  #{$property}: -moz-calc(#{$expression})
+  #{$property}: -webkit-calc(#{$expression})
+  #{$property}: calc(#{$expression})
 
 p, label, input[type="text"], textarea, a
   font-size: 1.0rem
@@ -7,6 +12,9 @@ p, label, input[type="text"], textarea, a
 
 .underline
   text-decoration: underline
+
+.transition-ease
+  transition: all 300ms ease
 
 .no-underline
   text-decoration: none
@@ -79,12 +87,18 @@ div[data-global-layer="popups"] .popup-manager__popup-container
   cursor: pointer
 
 .button
+  @extend .transition-ease
   @extend .pointer
   @extend .radius-3
-  @extend .bg-white-darken-4
-  @extend .fg-black-lighten-10
+  @extend .char.bg-0.darken-2
   @extend .display-inline-block
+  @extend .border-1
   @extend .input-padding
+  @extend .char.bc-0.darken-5
+  @extend .fg-white
+
+.button:hover
+  @extend .char.bg-0
 
 .vert-hack__table
   @extend .display-table 
@@ -115,12 +129,30 @@ div[data-global-layer="popups"] .popup-manager__popup-container
 .display-table--fixed
   table-layout: fixed
 
+.application-header__inner,
+.application-footer__inner
+  @extend .border-top-light 
+  @extend .bg-black-lighten-6
+  @extend .fg-white
+
+.application-outlet
+  +calc("min-height", "100vh - 10rem")
+  @extend .oc 
+  @extend .padding-tb-10
+  @extend .position-relative
+  min-height: calc("100vh - 3rem")
+
+.application-header__inner
+  @extend .padding-tb-10
+
+.application-header__inner a[href]
+  @extend .fg-white
+
+.application-footer__inner
+  @extend .padding-tb-30 
+
 .hoc-menu__toggle
   @extend .button
-
-.hoc-table__table-container 
-  @extend .border-1
-  @extend .border-color-white-darken-10
 
 .hoc-table__table
   @extend .align-left
@@ -133,11 +165,23 @@ div[data-global-layer="popups"] .popup-manager__popup-container
   @extend .padding-tb-5
   @extend .padding-lr-10
 
-.hoc-table__table tbody td
-  @extend .border-bottom-light
+.hoc-table__table tbody
+  @extend .transition-ease
 
-.hoc-table__table tbody:last-child td
-  @extend .border-bottom-0
+.hoc-table__table tbody:hover
+  @extend .bg-white-darken-10
+
+.hoc-table__table tbody td
+  @extend .border-bottom-1
+  @extend .border-color-white-darken-20
+
+.hoc-table__table tbody td:last-child
+  @extend .border-right-1
+  @extend .border-color-white-darken-20
+
+.hoc-table__table tbody td:first-child
+  @extend .border-left-1
+  @extend .border-color-white-darken-20
 
 .hoc-table__pagination-container
   @extend .margin-top-10
@@ -176,14 +220,6 @@ div[data-global-layer="popups"] .popup-manager__popup-container
 .hoc-table__pagination-control-previous-button
   @extend .button
 
-.hoc-table__column-header-inner
-  @extend .clearfix
-  @extend .border-right-1
-  @extend .border-color-white-darken-10
-
-.hoc-table__table thead th:last-child .hoc-table__column-header-inner
-  @extend .border-right-0
-
 .hoc-table__column-header[data-sortable="true"]
   @extend .pointer
 
@@ -203,15 +239,15 @@ div[data-global-layer="popups"] .popup-manager__popup-container
   @extend .margin-left-0
 
 .hoc-table__table thead th
-  @extend .border-bottom-light
-  @extend .fg-black-lighten-15
-  @extend .bg-white-darken-4
+  @extend .fg-white-darken-5
+  @extend .bg-black-lighten-10
+  @extend .border-color-black-lighten-10
 
 .background-transparent
   background-color: transparent
 
 .hoc-table__size-menu-option
-  transition: all 300ms ease
+  @extend .transition-ease
   @extend .padding-tb-5
   @extend .padding-lr-10
   @extend .align-right
@@ -231,9 +267,6 @@ div[data-global-layer="popups"] .popup-manager__popup-container
 .select-item
   @extend .padding-lr-5
   @extend .padding-tb-3
-
-.transition-ease
-  transition: all 300ms ease
 
 .bg-shadowy
   background-color: rgba(0,0,0,0.1)

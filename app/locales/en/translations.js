@@ -1,5 +1,6 @@
 export default {
   'about'              : 'About',
+  'charcoal'           : 'Charcoal',
   'date_created'       : 'Date Created',
   'displaying'         : 'Displaying',
   'displaying_x_of_y'  : 'Displaying {{x}} of {{y}} results',

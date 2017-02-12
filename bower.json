@@ -1,7 +1,7 @@
 {
   "name": "charcoal",
   "dependencies": {
-    "krmp.cc": "https://krmp.cc/618fef/package?steps=10&shade_min=75&noconflict=char",
+    "krmp.cc": "https://krmp.cc/4392f1/package?steps=10&shade_min=65&noconflict=char&expanded=true",
     "bases.scss": "^2.4.1"
   }
 }

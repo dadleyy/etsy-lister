@@ -1,6 +1,6 @@
 {
   "name": "charcoal",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "emberjs playground",
   "license": "MIT",
   "author": {
@@ -19,6 +19,7 @@
     "start": "ember server",
     "dev:api": "node api/server.js",
     "vendor:install": "bower i",
+    "bower:clean": "rimraf bower_components && bower cache clean && bower i",
     "test": "ember test"
   },
   "devDependencies": {
@@ -57,7 +58,8 @@
     "karma": "^1.4.1",
     "karma-phantomjs-launcher": "^1.0.2",
     "loader.js": "^4.0.10",
-    "phantomjs": "^2.1.7"
+    "phantomjs": "^2.1.7",
+    "rimraf": "^2.5.4"
   },
   "engines": {
     "node": ">= 6.9.0"
