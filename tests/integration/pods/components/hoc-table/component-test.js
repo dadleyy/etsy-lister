@@ -1,29 +1,27 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import EmberObject from '@ember/object';
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-const { RSVP: deferred } = Ember;
+import { resolve } from 'rsvp';
 
-const Delegate = Ember.Object.extend({ 
-  rows() {
-    return deferred.resolve({ rows: [], count: 0});
-  },
+const Delegate = EmberObject.extend({
   columns() {
-  }
+  },
+  rows() {
+    return resolve([]);
+  },
 });
 
-moduleForComponent('hoc-table', 'Integration | Component | hoc table', {
-  integration: true
-});
+describe('Integration | Component | hoc table', function() {
+  setupComponentTest('hoc-table', {
+    integration: true
+  });
 
-test('it renders', function(assert) {
-  const delegate = Delegate.create();
-  this.set('delegate', delegate);
-
-  // Template block usage:
-  this.render(hbs`
-    {{#hoc-table delegate=delegate}}
-    {{/hoc-table}}
-  `);
-
-  assert.equal(true, true);
+  it('renders', function() {
+    const delegate = Delegate.create({ });
+    this.set('delegate', delegate);
+    this.render(hbs`{{hoc-table delegate=delegate}}`);
+    expect(this.$()).to.have.length(1);
+  });
 });
